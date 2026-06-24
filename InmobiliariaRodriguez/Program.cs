@@ -1,4 +1,8 @@
+using InmobiliariaRodriguez.Web.Datos;
+using Microsoft.EntityFrameworkCore;
+
 namespace InmobiliariaRodriguez
+
 {
     public class Program
     {
@@ -8,6 +12,9 @@ namespace InmobiliariaRodriguez
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            // Inyección de dependencia para la Base de Datos
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
