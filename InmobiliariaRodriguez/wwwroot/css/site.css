@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+:root {
+    --color-primario: #0D1B2A; /* Azul muy oscuro */
+    --color-secundario: #1B263B; /* Azul oscuro */
+    --color-dorado: #D4AF37; /* Detalles y botones */
+    --color-fondo: #F2E9D8; /* Beige clarito para fondos suaves */
+    --color-gris: #E6E6E6; /* Gris para bordes o fondos alternativos */
+
+    --fuente-titulos: 'Cormorant Garamond', serif;
+    --fuente-textos: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .fuente-titulos {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+body, p, a, span, button, input {
+    font-family: 'Montserrat', sans-serif;
+}
