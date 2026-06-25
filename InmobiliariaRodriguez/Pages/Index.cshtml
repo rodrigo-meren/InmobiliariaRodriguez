@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- Sección Cabecera (Hero) -->
+<div class="text-center py-5 mb-4">
+    <h1 class="display-4 fw-bold texto-primario mt-4 mb-3">INMOBILIARIA RODRÍGUEZ</h1>
+    <h3 class="texto-dorado mb-4" style="letter-spacing: 2px; font-weight: 400;">CONFIANZA QUE CONSTRUYE FUTURO</h3>
+    <p class="lead texto-secundario" style="font-style: italic;">Tu próximo hogar empieza acá.</p>
+</div>
+
+<!-- Sección Tarjetas de Ciudades -->
+<div class="container pb-5">
+    <div class="row g-4 justify-content-center">
+        
+        <!-- Tarjeta Avellaneda -->
+        <div class="col-md-4">
+            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
+                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
+                    <h2 class="card-title texto-primario mb-3">Avellaneda</h2>
+                    <p class="card-text texto-secundario mb-4">Encontrá propiedades en el polo urbano y residencial del sur.</p>
+                    <a asp-page="/Catalogo/Index" asp-route-ciudad="Avellaneda" class="btn btn-primario mt-auto mx-auto w-75">
+                        Ver propiedades
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta Quilmes -->
+        <div class="col-md-4">
+            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
+                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
+                    <h2 class="card-title texto-primario mb-3">Quilmes</h2>
+                    <p class="card-text texto-secundario mb-4">Casas, departamentos y lotes en la localidad y sus alrededores.</p>
+                    <a asp-page="/Catalogo/Index" asp-route-ciudad="Quilmes" class="btn btn-primario mt-auto mx-auto w-75">
+                        Ver propiedades
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta San Clemente -->
+        <div class="col-md-4">
+            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
+                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
+                    <h2 class="card-title texto-primario mb-3">San Clemente</h2>
+                    <p class="card-text texto-secundario mb-4">Ventas y alquileres temporarios para disfrutar de la costa.</p>
+                    <a asp-page="/Catalogo/Index" asp-route-ciudad="SanClementeDelTuyu" class="btn btn-primario mt-auto mx-auto w-75">
+                        Ver propiedades
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

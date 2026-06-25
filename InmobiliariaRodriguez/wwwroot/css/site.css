@@ -1,26 +1,4 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
+/* --- VARIABLES DE MARCA --- */
 :root {
     --color-primario: #0D1B2A; /* Azul muy oscuro */
     --color-secundario: #1B263B; /* Azul oscuro */
@@ -32,10 +10,64 @@ body {
     --fuente-textos: 'Montserrat', sans-serif;
 }
 
+/* --- TIPOGRAFÍAS --- */
 h1, h2, h3, h4, h5, h6, .fuente-titulos {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--fuente-titulos);
 }
 
 body, p, a, span, button, input {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fuente-textos);
 }
+
+/* --- ESTILOS DE COLOR BASE --- */
+body {
+    background-color: var(--color-fondo);
+}
+
+.texto-primario {
+    color: var(--color-primario);
+}
+
+.texto-secundario {
+    color: var(--color-secundario);
+}
+
+.texto-dorado {
+    color: var(--color-dorado);
+}
+
+/* --- BOTONES PERSONALIZADOS --- */
+.btn-primario {
+    background-color: var(--color-primario);
+    color: var(--color-fondo);
+    border: 1px solid var(--color-primario);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0; /* Bordes rectos más elegantes */
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+}
+
+    .btn-primario:hover {
+        background-color: var(--color-dorado);
+        border-color: var(--color-dorado);
+        color: var(--color-primario);
+    }
+
+/* --- TARJETAS DE CIUDAD CON EFECTO HOVER --- */
+.tarjeta-ciudad {
+    background-color: #ffffff;
+    border-bottom: 5px solid var(--color-dorado) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+}
+
+    .tarjeta-ciudad:hover {
+        transform: translateY(-10px); /* Hace que la tarjeta "suba" un poquito */
+        box-shadow: 0 15px 30px rgba(13, 27, 42, 0.15) !important;
+    }
+
+    .tarjeta-ciudad h2 {
+        font-weight: 700;
+    }
