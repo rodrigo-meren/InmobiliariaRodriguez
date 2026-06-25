@@ -1,0 +1,106 @@
+﻿@page
+@model InmobiliariaRodriguez.Web.Pages.Admin.Propiedades.CrearModel
+@using InmobiliariaRodriguez.Web.Models
+@{
+    ViewData["Title"] = "Cargar Nueva Propiedad";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row border-bottom pb-3 mb-4">
+        <div class="col">
+            <h2 class="texto-primario fw-bold">Cargar Nueva Propiedad</h2>
+            <p class="text-muted">Complete los datos para publicar un nuevo inmueble en el catálogo.</p>
+        </div>
+    </div>
+
+    <form method="post" class="card shadow-sm border-0 bg-white p-4">
+        
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Datos Principales</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Título de la publicación</label>
+                <input asp-for="Propiedad.Titulo" class="form-control" placeholder="Ej: Hermoso chalet a 2 cuadras del mar..." required />
+            </div>
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Descripción detallada</label>
+                <textarea asp-for="Propiedad.Descripcion" class="form-control" rows="4" required></textarea>
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Ubicación</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Partido</label>
+                <select asp-for="Propiedad.Partido" asp-items="Html.GetEnumSelectList<Partido>()" class="form-select"></select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Ciudad</label>
+                <input asp-for="Propiedad.Ciudad" class="form-control" placeholder="Ej: San Clemente, Bernal..." required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Dirección</label>
+                <input asp-for="Propiedad.Direccion" class="form-control" placeholder="Calle y número" />
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Operación y Precio</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Tipo de Operación</label>
+                <select asp-for="Propiedad.TipoOperacion" asp-items="Html.GetEnumSelectList<TipoOperacion>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Tipo de Propiedad</label>
+                <select asp-for="Propiedad.TipoPropiedad" asp-items="Html.GetEnumSelectList<TipoPropiedad>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Moneda</label>
+                <select asp-for="Propiedad.Moneda" class="form-select">
+                    <option value="USD">Dólares (USD)</option>
+                    <option value="ARS">Pesos (ARS)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Precio</label>
+                <input asp-for="Propiedad.Precio" type="number" step="0.01" class="form-control" required />
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Características Físicas</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Ambientes</label>
+                <input asp-for="Propiedad.Ambientes" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Habitaciones</label>
+                <input asp-for="Propiedad.Habitaciones" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Baños</label>
+                <input asp-for="Propiedad.Baños" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Cocheras</label>
+                <input asp-for="Propiedad.Cocheras" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">M2 Totales</label>
+                <input asp-for="Propiedad.MetrosTotales" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">M2 Cubiertos</label>
+                <input asp-for="Propiedad.MetrosCubiertos" type="number" class="form-control" min="0" />
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-12 text-end">
+                <a href="#" class="btn btn-outline-secondary me-2">Cancelar</a>
+                <button type="submit" class="btn btn-primario">
+                    Guardar Propiedad
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
