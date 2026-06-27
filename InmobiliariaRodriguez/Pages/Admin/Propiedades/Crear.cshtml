@@ -31,11 +31,15 @@
         <div class="row g-3 mb-4">
             <div class="col-md-4">
                 <label class="form-label fw-bold">Partido</label>
-                <select asp-for="Propiedad.Partido" asp-items="Html.GetEnumSelectList<Partido>()" class="form-select"></select>
+                <select asp-for="Propiedad.Partido" asp-items="Html.GetEnumSelectList<Partido>()" class="form-select" id="selectPartido" required>
+                    <option value="">Seleccione un partido...</option>
+                </select>
             </div>
             <div class="col-md-4">
-                <label class="form-label fw-bold">Ciudad</label>
-                <input asp-for="Propiedad.Ciudad" class="form-control" placeholder="Ej: San Clemente, Bernal..." required />
+                <label class="form-label fw-bold">Localidad (Ciudad)</label>
+                <select asp-for="Propiedad.Ciudad" class="form-select" id="selectCiudad" required>
+                    <option value="">Primero seleccione un Partido...</option>
+                </select>
             </div>
             <div class="col-md-4">
                 <label class="form-label fw-bold">Dirección</label>
@@ -104,7 +108,7 @@
             </div>
         </div>
 
-        <div class="row g-3 mt-2">
+       
 
         <div class="row g-3 mt-2">
             <div class="col-12 text-end">
@@ -116,3 +120,40 @@
         </div>
     </form>
 </div>
+    @section Scripts {
+        <script>
+            // Diccionario con las localidades.
+            // Los números 0, 1 y 2 corresponden a los valores del Enum Partido (Avellaneda=0, Quilmes=1, LaCosta=2)
+            const localidadesPorPartido = {
+                "0": ["Avellaneda Centro", "Sarandí", "Villa Domínico", "Wilde", "Gerli", "Piñeyro", "Dock Sud"],
+                "1": ["Quilmes Centro", "Bernal", "Ezpeleta", "San Francisco Solano", "Don Bosco", "Villa La Florida"],
+                "2": ["San Clemente del Tuyú", "Las Toninas", "Santa Teresita", "Mar del Tuyú", "Costa del Este", "Aguas Verdes", "La Lucila del Mar", "San Bernardo", "Mar de Ajó"]
+            };
+
+            const selectPartido = document.getElementById('selectPartido');
+            const selectCiudad = document.getElementById('selectCiudad');
+
+            // Escuchamos cada vez que el usuario cambia de Partido
+            selectPartido.addEventListener('change', function() {
+                const partidoId = this.value;
+
+                // Limpiamos el desplegable de ciudades
+                selectCiudad.innerHTML = '<option value="">Seleccione una localidad...</option>';
+
+                // Si seleccionó un partido válido, cargamos sus ciudades
+                if (partidoId !== "") {
+                    const localidades = localidadesPorPartido[partidoId];
+
+                    localidades.forEach(loc => {
+                        const option = document.createElement('option');
+                        option.value = loc;
+                        option.textContent = loc;
+                        selectCiudad.appendChild(option);
+                    });
+                } else {
+                    // Si volvió a poner "Seleccione un partido..."
+                    selectCiudad.innerHTML = '<option value="">Primero seleccione un Partido...</option>';
+                }
+            });
+        </script>
+    }

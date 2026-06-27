@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model InmobiliariaRodriguez.Web.Pages.Admin.Propiedades.EliminarModel
+@{
+    ViewData["Title"] = "Eliminar Propiedad";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card border-danger shadow-sm">
+                <div class="card-header bg-danger text-white fs-5 fw-bold py-3">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i> ¡Atención!
+                </div>
+
+                <div class="card-body p-4">
+                    <h3 class="card-title text-danger mb-3">¿Estás seguro de que querés borrar esto?</h3>
+                    <p class="card-text text-muted">
+                        Vas a eliminar permanentemente esta propiedad de la base de datos. <strong>También se borrarán todas las imágenes asociadas.</strong> Esta acción no se puede deshacer.
+                    </p>
+
+                    <div class="bg-light p-3 rounded mb-4 mt-4 border">
+                        <h5 class="fw-bold texto-primario">@Model.Propiedad.Titulo</h5>
+                        <ul class="list-unstyled mb-0 mt-2 text-muted">
+                            <li><strong>Ubicación:</strong> @Model.Propiedad.Ciudad, @Model.Propiedad.Partido</li>
+                            <li><strong>Operación:</strong> @Model.Propiedad.TipoOperacion</li>
+                            <li><strong>Precio:</strong> @Model.Propiedad.Moneda @Model.Propiedad.Precio.ToString("N0")</li>
+                        </ul>
+                    </div>
+
+                    <form method="post" class="d-flex justify-content-end gap-3 mt-4">
+                        <a asp-page="./Index" class="btn btn-outline-secondary">Cancelar</a>
+
+                        <button type="submit" class="btn btn-danger px-4">
+                            Sí, eliminar propiedad
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
