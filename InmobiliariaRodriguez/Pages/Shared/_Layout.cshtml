@@ -14,37 +14,45 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/InmobiliariaRodriguez.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primario border-bottom-dorado mb-4 shadow-sm">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">InmobiliariaRodriguez</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand fuente-titulos fw-bold texto-dorado" asp-area="" asp-page="/Index">
+                    Inmobiliaria Rodríguez
+                </a>
+
+                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/Admin/Propiedades/Index">Panel Admin</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main role="main" class="flex-grow-1 mb-5">
+        @RenderBody()
+    </main>
+
+    <footer class="pie-pagina mt-auto py-4 bg-secundario text-white text-center">
         <div class="container">
-            &copy; 2026 - InmobiliariaRodriguez - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <h4 class="fuente-titulos texto-dorado mb-1">INMOBILIARIA RODRÍGUEZ</h4>
+            <p class="mb-0" style="font-size: 0.9rem;">
+                &copy; @DateTime.Now.Year - Confianza que construye futuro. <br />
+                <span class="text-muted">Avellaneda | Quilmes | La Costa</span>
+            </p>
         </div>
     </footer>
 

@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <form method="post" class="card shadow-sm border-0 bg-white p-4">
+    <form method="post" enctype="multipart/form-data" class="card shadow-sm border-0 bg-white p-4">
         
         <h4 class="texto-dorado border-bottom pb-2 mb-3">Datos Principales</h4>
         <div class="row g-3 mb-4">
@@ -93,6 +93,18 @@
                 <input asp-for="Propiedad.MetrosCubiertos" type="number" class="form-control" min="0" />
             </div>
         </div>
+        <h4 class="texto-dorado border-bottom pb-2 mb-3 mt-4">Galería de Imágenes</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Seleccionar fotos</label>
+                <input asp-for="ImagenesSubidas" type="file" multiple accept="image/*" class="form-control" />
+                <div class="form-text text-muted">
+                    Podés seleccionar múltiples archivos al mismo tiempo manteniendo presionada la tecla <b>Ctrl</b>. La primera imagen seleccionada será la foto principal del inmueble.
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
 
         <div class="row g-3 mt-2">
             <div class="col-12 text-end">
