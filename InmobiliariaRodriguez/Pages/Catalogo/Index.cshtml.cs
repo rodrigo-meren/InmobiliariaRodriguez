@@ -26,8 +26,8 @@ namespace InmobiliariaRodriguez.Web.Pages.Catalogo
 
             // Iniciamos la consulta trayendo solo las propiedades disponibles y cargando sus imágenes
             var consulta = _context.Propiedades
-                .Include(p => p.Imagenes)
-                .Where(p => p.Estado == EstadoPropiedad.Disponible);
+                 .Include(p => p.Imagenes)
+                 .Where(p => p.MostrarEnCatalogo == true);
 
             // Si llegó un partido por la URL (ej: hicieron clic en La Costa), filtramos
             if (partido.HasValue)

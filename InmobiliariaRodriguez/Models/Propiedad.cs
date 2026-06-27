@@ -28,7 +28,8 @@ namespace InmobiliariaRodriguez.Web.Models
 
         public TipoOperacion TipoOperacion { get; set; }
 
-        public EstadoPropiedad Estado { get; set; } = EstadoPropiedad.Disponible;
+        
+        public bool MostrarEnCatalogo { get; set; } = true;
 
         // Valores monetarios
         [Column(TypeName = "decimal(18,2)")]
@@ -50,7 +51,7 @@ namespace InmobiliariaRodriguez.Web.Models
 
         // Control interno
         public DateTime FechaAlta { get; set; } = DateTime.UtcNow;
-
+        public EstadoPropiedad Estado { get; set; } = EstadoPropiedad.Disponible;
         // Relaciones
         public List<ImagenPropiedad> Imagenes { get; set; } = new List<ImagenPropiedad>();
     }
