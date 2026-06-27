@@ -17,11 +17,11 @@
         Galpon
     }
 
-    public enum Ciudad
+    public enum Partido
     {
         Avellaneda,
         Quilmes,
-        SanClementeDelTuyu
+        LaCosta
     }
 
     public enum EstadoPropiedad

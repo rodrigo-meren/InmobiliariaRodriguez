@@ -1,0 +1,157 @@
+﻿@page "{id:int}"
+@model InmobiliariaRodriguez.Web.Pages.Catalogo.DetalleModel
+@{
+    ViewData["Title"] = Model.Propiedad.Titulo;
+}
+
+<div class="container mt-4 mb-5">
+    <div class="mb-4">
+        <a href="javascript:history.back()" class="text-decoration-none texto-secundario">
+            <i class="bi bi-arrow-left"></i> &larr; Volver al catálogo
+        </a>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-lg-7">
+            @if (Model.Propiedad.Imagenes != null && Model.Propiedad.Imagenes.Any())
+            {
+                <div id="carruselPropiedad" class="carousel slide shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Model.Propiedad.Imagenes.Count; i++)
+                        {
+                            var imagen = Model.Propiedad.Imagenes[i];
+                            // La primera imagen tiene que tener la clase "active" para que el carrusel arranque
+                            var activeClass = i == 0 ? "active" : "";
+                            
+                            <div class="carousel-item @activeClass">
+                                <img src="@imagen.UrlImagen" class="d-block w-100" alt="Foto Propiedad" style="height: 500px; object-fit: cover;">
+                            </div>
+                        }
+                    </div>
+                    
+                    @if (Model.Propiedad.Imagenes.Count > 1)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselPropiedad" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carruselPropiedad" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="bg-light rounded d-flex align-items-center justify-content-center shadow-sm" style="height: 500px;">
+                    <span class="text-muted fs-4">Sin imágenes disponibles</span>
+                </div>
+            }
+
+            <div class="mt-5">
+                <h4 class="texto-primario fw-bold border-bottom pb-2 mb-3">Descripción de la propiedad</h4>
+                <p class="text-break" style="white-space: pre-line;">
+                    @Model.Propiedad.Descripcion
+                </p>
+            </div>
+
+           
+            
+            <div class="mt-5 mb-4">
+                <h4 class="texto-primario fw-bold border-bottom pb-2 mb-3">Ubicación y Entorno</h4>
+
+                @{
+                    // Armamos la cadena de texto exacta que Google necesita para encontrar el lugar.
+                    // Si el empleado cargó la calle, la usamos. Si no, mostramos el centro de la ciudad.
+                    string direccionBusqueda = !string.IsNullOrWhiteSpace(Model.Propiedad.Direccion)
+                        ? $"{Model.Propiedad.Direccion}, {Model.Propiedad.Ciudad}, Provincia de Buenos Aires, Argentina"
+                        : $"{Model.Propiedad.Ciudad}, {Model.Propiedad.Partido}, Provincia de Buenos Aires, Argentina";
+
+                    // Convertimos la dirección a un formato seguro para URLs (cambia espacios por %20, etc.)
+                    string urlMapa = $"https://maps.google.com/maps?q={Uri.EscapeDataString(direccionBusqueda)}&t=&z=15&ie=UTF8&iwloc=&output=embed";
+                }
+
+                <div class="ratio ratio-16x9 shadow-sm rounded overflow-hidden">
+                    <iframe src="@urlMapa"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            style="border:0;">
+                    </iframe>
+                </div>
+
+               
+        </div>
+
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 sticky-top" style="top: 2rem;">
+                <div class="card-body p-4">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-primario fs-6">@Model.Propiedad.TipoOperacion</span>
+                        <span class="text-muted"><i class="bi bi-geo-alt"></i> @Model.Propiedad.Ciudad, @Model.Propiedad.Partido</span>
+                    </div>
+
+                    <h2 class="texto-dorado fw-bold mt-3 mb-1">
+                        @Model.Propiedad.Moneda @Model.Propiedad.Precio.ToString("N0")
+                    </h2>
+                    <h3 class="texto-primario fw-bold mb-4 fs-5">@Model.Propiedad.Titulo</h3>
+                    
+                    <hr />
+
+                    <div class="row row-cols-2 g-3 mb-4 mt-2">
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Tipo</span>
+                            <span class="fw-bold">@Model.Propiedad.TipoPropiedad</span>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Superficie Total</span>
+                            <span class="fw-bold">@Model.Propiedad.MetrosTotales m²</span>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Ambientes</span>
+                            <span class="fw-bold">@Model.Propiedad.Ambientes</span>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Habitaciones</span>
+                            <span class="fw-bold">@Model.Propiedad.Habitaciones</span>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Baños</span>
+                            <span class="fw-bold">@Model.Propiedad.Baños</span>
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <span class="text-muted small">Cocheras</span>
+                            <span class="fw-bold">@Model.Propiedad.Cocheras</span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="mt-4">
+                        <p class="text-muted small mb-3">¿Te interesa esta propiedad? Contactanos para coordinar una visita o sacarte las dudas.</p>
+
+                        @{
+                            
+                            string numeroWhatsApp = "542252410561";
+
+                            // Armamos el mensaje automático
+                            string mensaje = $"Hola Inmobiliaria Rodríguez! Me interesa la propiedad '{Model.Propiedad.Titulo}' ubicada en {Model.Propiedad.Ciudad}. ¿Podrían darme más información?";
+
+                            // Codificamos el texto para que sea seguro enviarlo por una URL
+                            string urlWhatsApp = $"https://wa.me/{numeroWhatsApp}?text={Uri.EscapeDataString(mensaje)}";
+                        }
+
+                        <a href="@urlWhatsApp" target="_blank" class="btn btn-primario w-100 py-3 fs-5 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-whatsapp"></i> Contactar por WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

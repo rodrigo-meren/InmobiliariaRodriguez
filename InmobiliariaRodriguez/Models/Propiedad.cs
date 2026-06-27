@@ -15,10 +15,14 @@ namespace InmobiliariaRodriguez.Web.Models
         [Required(ErrorMessage = "La descripción es obligatoria")]
         public string Descripcion { get; set; } = null!;
 
-        public Ciudad Ciudad { get; set; }
+        public Partido Partido { get; set; }
+
+        [Required(ErrorMessage = "La ciudad es obligatoria")]
+        [StringLength(100)]
+        public string Ciudad { get; set; } = null!;
 
         [StringLength(200)]
-        public string Direccion { get; set; } = null!; // Podríamos ocultarla parcialmente en la vista pública
+        public string Direccion { get; set; } = null!;
 
         public TipoPropiedad TipoPropiedad { get; set; }
 
