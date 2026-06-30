@@ -111,3 +111,105 @@ body {
     position: relative; 
     z-index: 10;
 }
+
+/* =========================================
+   HERO PANTALLA DIVIDIDA (OPCIÓN 1)
+   ========================================= */
+.split-container {
+    display: flex;
+    width: 100%;
+    /* Ocupa el alto de la pantalla menos la barra de navegación */
+    height: calc(100vh - 70px);
+   
+}
+
+.split-panel {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /* La magia de la animación: transición suave al ensancharse */
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+    /* Capa oscura base para que el texto resalte */
+    .split-panel::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(11, 33, 56, 0.6);
+        transition: background 0.6s ease;
+        z-index: 1;
+    }
+
+    /* Efectos al pasar el mouse (Hover) */
+    .split-panel:hover {
+        flex: 1.5; /* Hace que la columna se ensanche */
+    }
+
+        .split-panel:hover::before {
+            background: rgba(11, 33, 56, 0.2); /* Se aclara la foto */
+        }
+
+.split-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.split-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    margin-bottom: 0;
+    transition: transform 0.4s ease;
+}
+
+.split-btn-text {
+    opacity: 0; /* Oculto por defecto */
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    display: inline-block;
+    border-bottom: 2px solid var(--dorado);
+    padding-bottom: 2px;
+}
+
+.split-panel:hover .split-title {
+    transform: translateY(-10px); /* El título sube un poquito */
+}
+
+.split-panel:hover .split-btn-text {
+    opacity: 1; /* Aparece el texto del enlace */
+    transform: translateY(0);
+}
+
+/* Adaptación para celulares (pantallas chicas) */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column; /* Apila las cajas una arriba de la otra */
+        height: auto;
+    }
+
+    .split-panel {
+        min-height: 33vh; /* Cada franja ocupa un tercio exacto de la pantalla del celu */
+    }
+
+        .split-panel:hover {
+            flex: 1; /* Desactiva el ensanchamiento en celulares */
+        }
+
+    .split-btn-text {
+        opacity: 1; /* En celular siempre mostramos el texto porque no hay "hover" */
+        transform: translateY(0);
+    }
+}

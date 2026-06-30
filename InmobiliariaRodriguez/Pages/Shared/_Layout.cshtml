@@ -18,7 +18,7 @@
 <body class="d-flex flex-column min-vh-100">
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primario border-bottom-dorado mb-4 shadow-sm">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primario border-bottom-dorado  shadow-sm">
             <div class="container">
                 <a class="navbar-brand fuente-titulos fw-bold texto-dorado" asp-area="" asp-page="/Index">
                     Inmobiliaria Rodríguez
@@ -37,16 +37,30 @@
 
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item ms-2">
-                                <a class="nav-link fw-bold texto-dorado border border-warning rounded px-3" asp-area="" asp-page="/Admin/Propiedades/Index">
-                                    <i class="bi bi-gear-fill me-1"></i> Panel Admin
-                                </a>
-                            </li>
-                            <li class="nav-item ms-2">
-                                <a class="nav-link text-danger" asp-area="" asp-page="/Salir">
-                                    <i class="bi bi-box-arrow-right"></i> Salir
-                                </a>
-                            </li>
+                        <li class="nav-item dropdown ms-2">
+                            <a class="nav-link dropdown-toggle fw-bold texto-dorado border border-warning rounded px-3" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-gear-fill me-1"></i> Administración
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="adminDropdown">
+                                <li>
+                                    <a class="dropdown-item py-2" asp-area="" asp-page="/Admin/Propiedades/Index">
+                                        <i class="bi bi-house-door-fill me-2 texto-primario"></i> Propiedades
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item py-2" asp-area="" asp-page="/Admin/Usuarios/Index">
+                                        <i class="bi bi-people-fill me-2 texto-primario"></i> Empleados
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item ms-2 align-self-center">
+                            <a class="nav-link text-danger fw-bold" asp-area="" asp-page="/Salir">
+                                <i class="bi bi-box-arrow-right"></i> Salir
+                            </a>
+                        </li>
                         }
                     </ul>
                 </div>
@@ -54,9 +68,11 @@
         </nav>
     </header>
 
-    <main role="main" class="flex-grow-1 mb-5">
-        @RenderBody()
-    </main>
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
 
     <footer class="pie-pagina mt-auto py-4 bg-secundario text-white text-center">
         <div class="container">

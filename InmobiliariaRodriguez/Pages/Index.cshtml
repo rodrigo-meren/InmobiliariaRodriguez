@@ -4,55 +4,27 @@
     ViewData["Title"] = "Inicio";
 }
 
-<!-- Sección Cabecera (Hero) -->
-<div class="text-center py-5 mb-4">
-    <h1 class="display-4 fw-bold texto-primario mt-4 mb-3">INMOBILIARIA RODRÍGUEZ</h1>
-    <h3 class="texto-dorado mb-4" style="letter-spacing: 2px; font-weight: 400;">CONFIANZA QUE CONSTRUYE FUTURO</h3>
-    <p class="lead texto-secundario" style="font-style: italic;">Tu próximo hogar empieza acá.</p>
-</div>
+<div class="split-container">
 
-<!-- Sección Tarjetas de Partidos -->
-<div class="container pb-5">
-    <div class="row g-4 justify-content-center">
-        
-        <!-- Tarjeta Avellaneda -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">Avellaneda</h2>
-                    <p class="card-text texto-secundario mb-4">Encontrá propiedades en el polo urbano y residencial del sur.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="Avellaneda" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
-                </div>
-            </div>
+    <a asp-page="/Catalogo/Index" asp-route-partido="Avellaneda" class="split-panel" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Avellaneda_centro.jpg/960px-Avellaneda_centro.jpg.webp');">
+        <div class="split-content">
+            <h2 class="split-title">Avellaneda</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
         </div>
+    </a>
 
-        <!-- Tarjeta Quilmes -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">Quilmes</h2>
-                    <p class="card-text texto-secundario mb-4">Casas, departamentos y lotes en la cervecería y sus alrededores.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="Quilmes" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
-                </div>
-            </div>
+    <a asp-page="/Catalogo/Index" asp-route-partido="Quilmes" class="split-panel" style="background-image: url('https://www.infoquilmes.com.ar/fotos/2025/10/95240k76lqns1mp83otr.webp');">
+        <div class="split-content">
+            <h2 class="split-title">Quilmes</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
         </div>
+    </a>
 
-        <!-- Tarjeta La Costa -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">La Costa</h2>
-                    <p class="card-text texto-secundario mb-4">Ventas y alquileres temporarios para disfrutar del mar.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="LaCosta" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
-                </div>
-            </div>
+    <a asp-page="/Catalogo/Index" asp-route-partido="LaCosta" class="split-panel" style="background-image: url('https://lacosta.tur.ar/wp-content/uploads/2021/10/DJI_0154-retocada-1024x575.jpg');">
+        <div class="split-content">
+            <h2 class="split-title">La Costa</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
         </div>
+    </a>
 
-    </div>
 </div>
