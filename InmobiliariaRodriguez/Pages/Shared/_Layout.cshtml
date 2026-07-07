@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - InmobiliariaRodriguez</title>
+    <link rel="icon" type="image/svg+xml" href="~/img/LogoIR.svg">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Preconexión a Google Fonts para que cargue más rápido -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,8 +21,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primario border-bottom-dorado  shadow-sm">
             <div class="container">
-                <a class="navbar-brand fuente-titulos fw-bold texto-dorado" asp-area="" asp-page="/Index">
-                    Inmobiliaria Rodríguez
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-area="" asp-page="/Index">
+                    <!-- El logo escalado correctamente para que no rompa el alto del menú -->
+                    <img src="~/img/LogoIR.svg" alt="Logo Inmobiliaria Rodríguez" class="navbar-logo rounded" />
+                    <span class="fuente-titulos tracking-wide" style="font-size: 1.25rem;">INMOBILIARIA RODRÍGUEZ</span>
                 </a>
 
                 <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -30,37 +33,50 @@
                 </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <!-- Enlaces Públicos con Scroll -->
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Index">Inicio</a>
+                            <a class="nav-link" asp-page="/Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Index#sobre-nosotros">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Index#servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Index#tasaciones">Tasaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Catalogo/Index">Propiedades</a>
                         </li>
 
+                        <!-- El bloque de Administración (se mantiene intacto si está logueado) -->
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
-                        <li class="nav-item dropdown ms-2">
-                            <a class="nav-link dropdown-toggle fw-bold texto-dorado border border-warning rounded px-3" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-gear-fill me-1"></i> Administración
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="adminDropdown">
-                                <li>
-                                    <a class="dropdown-item py-2" asp-area="" asp-page="/Admin/Propiedades/Index">
-                                        <i class="bi bi-house-door-fill me-2 texto-primario"></i> Propiedades
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item py-2" asp-area="" asp-page="/Admin/Usuarios/Index">
-                                        <i class="bi bi-people-fill me-2 texto-primario"></i> Empleados
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item ms-2 align-self-center">
-                            <a class="nav-link text-danger fw-bold" asp-area="" asp-page="/Salir">
-                                <i class="bi bi-box-arrow-right"></i> Salir
-                            </a>
-                        </li>
+                            <li class="nav-item dropdown ms-lg-3 mt-2 mt-lg-0">
+                                <a class="nav-link dropdown-toggle fw-bold texto-dorado border border-warning rounded px-3" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-gear-fill me-1"></i> Administración
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="adminDropdown">
+                                    <li>
+                                        <a class="dropdown-item py-2" asp-page="/Admin/Propiedades/Index">
+                                            <i class="bi bi-house-door-fill me-2 texto-primario"></i> Propiedades
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item py-2" asp-page="/Admin/Usuarios/Index">
+                                            <i class="bi bi-people-fill me-2 texto-primario"></i> Empleados
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item ms-lg-2 align-self-center">
+                                <a class="nav-link text-danger fw-bold" asp-page="/Salir">
+                                    <i class="bi bi-box-arrow-right"></i> Salir
+                                </a>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -74,13 +90,66 @@
         </main>
     </div>
 
-    <footer class="pie-pagina mt-auto py-4 bg-secundario text-white text-center">
+    <footer class="bg-primario text-white pt-5 pb-3 border-top-dorado mt-auto">
         <div class="container">
-            <h4 class="fuente-titulos texto-dorado mb-1">INMOBILIARIA RODRÍGUEZ</h4>
-            <p class="mb-0" style="font-size: 0.9rem;">
-                &copy; @DateTime.Now.Year - Confianza que construye futuro. <br />
-                <span class="text-muted">Avellaneda | Quilmes | La Costa</span>
-            </p>
+            <div class="row g-4">
+                <!-- Columna 1: Branding -->
+                <div class="col-md-4">
+                    <h4 class="fuente-titulos texto-dorado fw-bold mb-3">INMOBILIARIA RODRÍGUEZ</h4>
+                    <p class="text-white-50 small">
+                        Tu puente firme entre las oportunidades comerciales de la ciudad y el descanso merecido frente al mar. Transparencia y seriedad en cada operación.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Enlaces Rápidos (Títulos más proporcionales) -->
+                <div class="col-md-4">
+                    <h4 class="fuente-titulos text-uppercase fw-bold mb-3 small letter-spacing-1" style="color: var(--dorado); font-size: 1.2rem;">Navegación</h4>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="/Index#sobre-nosotros" class="text-white-50 text-decoration-none small">Sobre Nosotros</a></li>
+                        <li class="mb-2"><a href="/Index#servicios" class="text-white-50 text-decoration-none small">Nuestros Servicios</a></li>
+                        <li class="mb-2"><a href="/Index#tasaciones" class="text-white-50 text-decoration-none small">Solicitar Tasación</a></li>
+                        <li class="mb-2"><a asp-page="/Catalogo/Index" class="text-white-50 text-decoration-none small">Catálogo de Propiedades</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Contacto y Redes Solucionadas -->
+                <div class="col-md-4">
+                    <h4 class="fuente-titulos text-uppercase fw-bold mb-3 small letter-spacing-1" style="color: var(--dorado); font-size: 1.2rem;">Contacto</h4>
+                    <p class="text-white-50 small mb-3">
+                        <i class="bi bi-envelope-fill me-2 text-white-50"></i> contacto@inmobiliariarodriguez.com
+                    </p>
+
+                    <!-- Redes emprolijadas con alineación interna garantizada -->
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="https://instagram.com/tu_usuario" target="_blank" class="btn btn-social-footer d-inline-flex align-items-center justify-content-center text-white" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5491112345678" target="_blank" class="btn btn-social-footer btn-ws-footer d-inline-flex align-items-center justify-content-center text-white" title="WhatsApp">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                        <a href="mailto:contacto@inmobiliariarodriguez.com" class="btn btn-social-footer d-inline-flex align-items-center justify-content-center text-white" title="Enviar Mail">
+                            <i class="bi bi-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+            <hr class="hr-opaco my-4">
+
+            <!-- Fila de Créditos de Autor -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <p class="mb-0 text-white-50 small">&copy; @DateTime.Now.Year Inmobiliaria Rodríguez. Todos los derechos reservados.</p>
+                </div>
+                <!-- El gancho de tu Portfolio como desarrollador -->
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 text-white-50 small">
+                        Desarrollado por
+                        <a href="https://tuportfolio.com" target="_blank" class="text-decoration-none fw-bold texto-dorado link-autor">
+                            Rodrigo Meren
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 

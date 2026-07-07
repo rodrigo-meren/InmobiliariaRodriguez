@@ -20,23 +20,59 @@ namespace InmobiliariaRodriguez.Web.Pages.Catalogo
         // Guardamos el partido actual para mostrarlo en el título de la página
         public Partido? PartidoActual { get; set; }
 
-        public async Task OnGetAsync(Partido? partido)
+        // Propiedades vinculadas a los filtros
+        [BindProperty(SupportsGet = true)] public string? Partido { get; set; }
+        [BindProperty(SupportsGet = true)] public string? Ciudad { get; set; } // Nuevo filtro
+        [BindProperty(SupportsGet = true)] public string? Operacion { get; set; }
+        [BindProperty(SupportsGet = true)] public string? Tipo { get; set; }
+        [BindProperty(SupportsGet = true)] public decimal? PrecioMax { get; set; }
+
+        // Lista para llenar el desplegable de localidades automáticamente
+        public List<string> CiudadesDisponibles { get; set; } = new List<string>();
+
+        public async Task OnGetAsync()
         {
-            PartidoActual = partido;
+            var query = _context.Propiedades.Include(p => p.Imagenes).AsQueryable();
 
-            // Iniciamos la consulta trayendo solo las propiedades disponibles y cargando sus imágenes
-            var consulta = _context.Propiedades
-                 .Include(p => p.Imagenes)
-                 .Where(p => p.MostrarEnCatalogo == true);
-
-            // Si llegó un partido por la URL (ej: hicieron clic en La Costa), filtramos
-            if (partido.HasValue)
+            // 1. Filtro estricto por Partido (Ahora es invisible para el usuario)
+            if (!string.IsNullOrEmpty(Partido) && Enum.TryParse<Partido>(Partido, out var partidoEnum))
             {
-                consulta = consulta.Where(p => p.Partido == partido.Value);
+                query = query.Where(p => p.Partido == partidoEnum);
             }
 
-            // Ejecutamos la consulta ordenando por las más recientes
-            Propiedades = await consulta.OrderByDescending(p => p.FechaAlta).ToListAsync();
+            // MAGIA: Antes de seguir filtrando, buscamos qué ciudades hay disponibles en este partido
+            CiudadesDisponibles = await query
+                .Select(p => p.Ciudad)
+                .Distinct()
+                .ToListAsync();
+
+            // 2. Filtro por Localidad/Barrio
+            if (!string.IsNullOrEmpty(Ciudad))
+            {
+                query = query.Where(p => p.Ciudad == Ciudad);
+            }
+
+            // 3. Filtro por Operación
+            if (!string.IsNullOrEmpty(Operacion) && Enum.TryParse<TipoOperacion>(Operacion, out var operacionEnum))
+            {
+                query = query.Where(p => p.TipoOperacion == operacionEnum);
+            }
+
+            // 4. Filtro por Tipo de Inmueble
+            if (!string.IsNullOrEmpty(Tipo) && Enum.TryParse<TipoPropiedad>(Tipo, out var tipoEnum))
+            {
+                query = query.Where(p => p.TipoPropiedad == tipoEnum);
+            }
+
+            // 5. Filtro por Precio Máximo
+            if (PrecioMax.HasValue && PrecioMax.Value > 0)
+            {
+                query = query.Where(p => p.Precio <= PrecioMax.Value);
+            }
+
+            Propiedades = await query.ToListAsync();
         }
+
+
     }
 }
