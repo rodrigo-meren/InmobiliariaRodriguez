@@ -1,0 +1,47 @@
+﻿@page
+@model InmobiliariaRodriguez.Web.Pages.LoginModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="container mt-5 mb-5 flex-grow-1 d-flex align-items-center">
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow border-0 overflow-hidden">
+                <div class="card-header bg-primario text-white text-center py-4 border-bottom-dorado">
+                    <h4 class="mb-0 fuente-titulos">Acceso Administrativo</h4>
+                </div>
+                <div class="card-body p-4 bg-white">
+
+                    @if (!string.IsNullOrEmpty(Model.MensajeError))
+                    {
+                        <div class="alert alert-danger text-center shadow-sm">
+                            <i class="bi bi-shield-x me-2"></i> @Model.MensajeError
+                        </div>
+                    }
+
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold texto-primario">Usuario</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                                <input type="text" asp-for="Usuario" class="form-control" required autofocus autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold texto-primario">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-key"></i></span>
+                                <input type="password" asp-for="Password" class="form-control" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primario w-100 py-2 fs-5 fw-bold">
+                            Ingresar al Sistema
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

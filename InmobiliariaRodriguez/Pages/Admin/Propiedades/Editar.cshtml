@@ -1,0 +1,195 @@
+﻿@page "{id:int}"
+@model InmobiliariaRodriguez.Web.Pages.Admin.Propiedades.EditarModel
+@using InmobiliariaRodriguez.Web.Models
+@{
+    ViewData["Title"] = "Editar Propiedad";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row border-bottom pb-3 mb-4">
+        <div class="col d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="texto-primario fw-bold">Editar Propiedad</h2>
+                <p class="text-muted mb-0">Modificá los datos del inmueble.</p>
+            </div>
+            <a asp-page="./Index" class="btn btn-outline-secondary">Volver al listado</a>
+        </div>
+    </div>
+
+   <form method="post" enctype="multipart/form-data" class="card shadow-sm border-0 bg-white p-4">
+        <input type="hidden" asp-for="Propiedad.Id" />
+        
+        <div asp-validation-summary="All" class="text-danger fw-bold mb-3"></div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Datos Principales</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-7">
+                <label class="form-label fw-bold">Título de la publicación</label>
+                <input asp-for="Propiedad.Titulo" class="form-control" required />
+            </div>
+            
+            <div class="col-md-3">
+                <label class="form-label fw-bold text-primary">Estado de la Propiedad</label>
+                <select asp-for="Propiedad.Estado" asp-items="Html.GetEnumSelectList<EstadoPropiedad>()" class="form-select border-primary"></select>
+            </div>
+            
+            <div class="col-md-2 d-flex align-items-end">
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" asp-for="Propiedad.MostrarEnCatalogo">
+                    <label class="form-check-label fw-bold" asp-for="Propiedad.MostrarEnCatalogo">Visible en Web</label>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Descripción detallada</label>
+                <textarea asp-for="Propiedad.Descripcion" class="form-control" rows="4" required></textarea>
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Ubicación</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Partido</label>
+                <select asp-for="Propiedad.Partido" asp-items="Html.GetEnumSelectList<Partido>()" class="form-select" id="selectPartido" required></select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Localidad (Ciudad)</label>
+                <select asp-for="Propiedad.Ciudad" class="form-select" id="selectCiudad" required></select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Dirección</label>
+                <input asp-for="Propiedad.Direccion" class="form-control" />
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Operación y Precio</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Tipo de Operación</label>
+                <select asp-for="Propiedad.TipoOperacion" asp-items="Html.GetEnumSelectList<TipoOperacion>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Tipo de Propiedad</label>
+                <select asp-for="Propiedad.TipoPropiedad" asp-items="Html.GetEnumSelectList<TipoPropiedad>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Moneda</label>
+                <select asp-for="Propiedad.Moneda" class="form-select">
+                    <option value="USD">Dólares (USD)</option>
+                    <option value="ARS">Pesos (ARS)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Precio</label>
+                <input asp-for="Propiedad.Precio" type="number" step="0.01" class="form-control" required />
+            </div>
+        </div>
+
+        <h4 class="texto-dorado border-bottom pb-2 mb-3">Características Físicas</h4>
+        <div class="row g-3 mb-4">
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Ambientes</label>
+                <input asp-for="Propiedad.Ambientes" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Habitaciones</label>
+                <input asp-for="Propiedad.Habitaciones" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Baños</label>
+                <input asp-for="Propiedad.Baños" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Cocheras</label>
+                <input asp-for="Propiedad.Cocheras" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">M2 Totales</label>
+                <input asp-for="Propiedad.MetrosTotales" type="number" class="form-control" min="0" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">M2 Cubiertos</label>
+                <input asp-for="Propiedad.MetrosCubiertos" type="number" class="form-control" min="0" />
+            </div>
+        </div>
+        <h4 class="texto-dorado border-bottom pb-2 mb-3 mt-4">Galería de Imágenes</h4>
+        
+        @if (Model.Propiedad.Imagenes != null && Model.Propiedad.Imagenes.Any())
+        {
+            <label class="form-label fw-bold mb-3">Imágenes actuales (Tildá las que quieras borrar)</label>
+            <div class="row g-3 mb-4">
+                @foreach (var img in Model.Propiedad.Imagenes)
+                {
+                    <div class="col-6 col-md-3 col-lg-2 text-center">
+                        <div class="position-relative border rounded p-1">
+                            <img src="@img.UrlImagen" class="img-fluid rounded mb-2" style="height: 100px; object-fit: cover; width: 100%;" />
+                            <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input border-danger" type="checkbox" name="ImagenesAEliminar" value="@img.Id" id="borrar_@img.Id">
+                                <label class="form-check-label ms-2 text-danger small" for="borrar_@img.Id">
+                                    Eliminar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Agregar fotos nuevas</label>
+                <input asp-for="NuevasImagenes" type="file" multiple accept="image/*" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-12 text-end">
+                <a asp-page="./Index" class="btn btn-outline-secondary me-2">Cancelar</a>
+                <button type="submit" class="btn btn-primario">Guardar Cambios</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        const localidadesPorPartido = {
+            "0": ["Avellaneda Centro", "Sarandí", "Villa Domínico", "Wilde", "Gerli", "Piñeyro", "Dock Sud"],
+            "1": ["Quilmes Centro", "Bernal", "Ezpeleta", "San Francisco Solano", "Don Bosco", "Villa La Florida"],
+            "2": ["San Clemente del Tuyú", "Las Toninas", "Santa Teresita", "Mar del Tuyú", "Costa del Este", "Aguas Verdes", "La Lucila del Mar", "San Bernardo", "Mar de Ajó"]
+        };
+
+        const selectPartido = document.getElementById('selectPartido');
+        const selectCiudad = document.getElementById('selectCiudad');
+
+        // Obtenemos los valores que ya vienen cargados desde la base de datos
+        const partidoActual = selectPartido.value;
+        const ciudadActual = '@Html.Raw(Model.Propiedad.Ciudad)';
+
+        // Función para llenar las ciudades
+        function cargarCiudades(partidoId, ciudadSeleccionada = "") {
+            selectCiudad.innerHTML = '<option value="">Seleccione una localidad...</option>';
+
+            if (partidoId !== "") {
+                const localidades = localidadesPorPartido[partidoId];
+                localidades.forEach(loc => {
+                    const option = document.createElement('option');
+                    option.value = loc;
+                    option.textContent = loc;
+                    if(loc === ciudadSeleccionada) {
+                        option.selected = true; // Si coincide con la BD, la dejamos seleccionada
+                    }
+                    selectCiudad.appendChild(option);
+                });
+            }
+        }
+
+        // 1. Ejecutamos la función apenas carga la página para pre-llenar los datos
+        cargarCiudades(partidoActual, ciudadActual);
+
+        // 2. Escuchamos si el usuario decide cambiar el partido manualmente
+        selectPartido.addEventListener('change', function() {
+            cargarCiudades(this.value);
+        });
+    </script>
+}

@@ -1,4 +1,5 @@
 ﻿using InmobiliariaRodriguez.Web.Models;
+using InmobiliariaRodriguez.Web.Models.InmobiliariaRodriguez.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
@@ -19,17 +20,24 @@ namespace InmobiliariaRodriguez.Web.Datos
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario
+                {
+                    Id = 1,
+                    Nombre = "Admin",
+                    Apellido = "Principal",
+                    Dni = "12345678",
+                    NombreUsuario = "12345678",
+                    Password = "12345678",
+                    RequiereCambioPassword = true // Lo obligamos a cambiarla al entrar
+                }
+            );
             // Configuramos la relación Uno a Muchos entre Propiedad e Imagen
             modelBuilder.Entity<ImagenPropiedad>()
                 .HasOne(i => i.Propiedad)
                 .WithMany(p => p.Imagenes)
                 .HasForeignKey(i => i.PropiedadId)
                 .OnDelete(DeleteBehavior.Cascade); // Si se borra la propiedad, se borran sus fotos
-
-            // Hacemos que el Email del usuario sea único para evitar cuentas duplicadas
-            modelBuilder.Entity<Usuario>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
 
             // Configuramos decimal para el Precio de la propiedad
             modelBuilder.Entity<Propiedad>()

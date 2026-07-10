@@ -30,6 +30,8 @@
         Reservada,
         Vendida,
         Alquilada,
-        Suspendida
+        Suspendida,
+        Retasada,
+        Oportunidad
     }
 }

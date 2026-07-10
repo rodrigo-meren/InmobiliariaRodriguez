@@ -4,55 +4,154 @@
     ViewData["Title"] = "Inicio";
 }
 
-<!-- Sección Cabecera (Hero) -->
-<div class="text-center py-5 mb-4">
-    <h1 class="display-4 fw-bold texto-primario mt-4 mb-3">INMOBILIARIA RODRÍGUEZ</h1>
-    <h3 class="texto-dorado mb-4" style="letter-spacing: 2px; font-weight: 400;">CONFIANZA QUE CONSTRUYE FUTURO</h3>
-    <p class="lead texto-secundario" style="font-style: italic;">Tu próximo hogar empieza acá.</p>
+<div class="split-container">
+
+    <a asp-page="/Catalogo/Index" asp-route-partido="Avellaneda" class="split-panel" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Avellaneda_centro.jpg/960px-Avellaneda_centro.jpg.webp?auto=format&fit=crop&w=1200&q=80');">
+        <div class="split-content">
+            <h2 class="split-title">Avellaneda</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
+        </div>
+    </a>
+
+    <a asp-page="/Catalogo/Index" asp-route-partido="Quilmes" class="split-panel" style="background-image: url('https://www.infoquilmes.com.ar/fotos/2025/10/95240k76lqns1mp83otr.webp?auto=format&fit=crop&w=1200&q=80');">
+        <div class="split-content">
+            <h2 class="split-title">Quilmes</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
+        </div>
+    </a>
+
+    <a asp-page="/Catalogo/Index" asp-route-partido="LaCosta" class="split-panel" style="background-image: url('https://lacosta.tur.ar/wp-content/uploads/2021/10/DJI_0154-retocada-1024x575.jpg?auto=format&fit=crop&w=1200&q=80');">
+        <div class="split-content">
+            <h2 class="split-title">La Costa</h2>
+            <span class="split-btn-text text-white">Ver propiedades <i class="bi bi-arrow-right"></i></span>
+        </div>
+    </a>
+
 </div>
 
-<!-- Sección Tarjetas de Partidos -->
-<div class="container pb-5">
-    <div class="row g-4 justify-content-center">
-        
-        <!-- Tarjeta Avellaneda -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">Avellaneda</h2>
-                    <p class="card-text texto-secundario mb-4">Encontrá propiedades en el polo urbano y residencial del sur.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="Avellaneda" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
+
+<!-- 2. SECCIÓN: SOBRE NOSOTROS (Fondo Gris Claro) -->
+<section id="sobre-nosotros" class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="text-uppercase fw-bold texto-dorado letter-spacing-1">Trayectoria y Confianza</span>
+                <h2 class="display-5 fw-bold texto-primario mt-2 mb-4 fuente-titulos">Inmobiliaria Rodríguez</h2>
+                <p class="lead text-muted">
+                    Somos una empresa familiar dedicada a conectar realidades: el ritmo y la oportunidad del Gran Buenos Aires con el descanso y la tranquilidad de la Costa Atlántica.
+                </p>
+                <p class="text-muted">
+                    Con oficinas estratégicas y un profundo conocimiento local en Avellaneda, Quilmes y San Clemente del Tuyú, nos especializamos en brindar un asesoramiento personalizado y transparente.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="p-4 bg-white shadow-sm rounded text-center border-bottom-dorado">
+                            <h3 class="display-4 fw-bold texto-primario mb-0">100%</h3>
+                            <p class="text-muted small mb-0 fw-bold">Transparencia Legal</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 bg-white shadow-sm rounded text-center border-bottom-dorado">
+                            <h3 class="display-4 fw-bold texto-primario mb-0">+3</h3>
+                            <p class="text-muted small mb-0 fw-bold">Zonas Estratégicas</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Tarjeta Quilmes -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">Quilmes</h2>
-                    <p class="card-text texto-secundario mb-4">Casas, departamentos y lotes en la cervecería y sus alrededores.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="Quilmes" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tarjeta La Costa -->
-        <div class="col-md-4">
-            <div class="card tarjeta-ciudad h-100 shadow-sm border-0">
-                <div class="card-body text-center p-5 d-flex flex-column justify-content-center">
-                    <h2 class="card-title texto-primario mb-3">La Costa</h2>
-                    <p class="card-text texto-secundario mb-4">Ventas y alquileres temporarios para disfrutar del mar.</p>
-                    <a asp-page="/Catalogo/Index" asp-route-partido="LaCosta" class="btn btn-primario mt-auto mx-auto w-75">
-                        Ver propiedades
-                    </a>
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
+</section>
+
+
+<!-- 3. SECCIÓN: LLAMADOR DE TASACIONES (Fondo Azul Oscuro) -->
+<section id="tasaciones" class="py-5 bg-primario text-white position-relative overflow-hidden">
+    <div class="container py-4 position-relative style-z-2">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="text-uppercase fw-bold texto-dorado letter-spacing-1">¿Sabés cuánto vale tu propiedad hoy?</span>
+                <h2 class="display-5 fw-bold my-3 fuente-titulos">Tasaciones Profesionales en 48hs</h2>
+                <p class="lead text-white-50 mb-4">
+                    El mercado inmobiliario cambia constantemente. No bases tu futuro en estimaciones al azar. Realizamos un estudio riguroso comparativo de mercado para darte el valor real y competitivo de tu inmueble.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 text-start mb-4">
+                    <div class="d-flex align-items-center bg-white bg-opacity-10 px-3 py-2 rounded">
+                        <i class="bi bi-check-circle-fill texto-dorado me-2"></i> <span>Presencial u Online</span>
+                    </div>
+                    <div class="d-flex align-items-center bg-white bg-opacity-10 px-3 py-2 rounded">
+                        <i class="bi bi-check-circle-fill texto-dorado me-2"></i> <span>Informe Técnico Escrito</span>
+                    </div>
+                    <div class="d-flex align-items-center bg-white bg-opacity-10 px-3 py-2 rounded">
+                        <i class="bi bi-check-circle-fill texto-dorado me-2"></i> <span>Apto Crédito / Sucesiones</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center text-lg-end">
+                <div class="p-4 bg-white text-dark rounded shadow-lg text-center mx-auto" style="max-width: 420px;">
+                    <h4 class="fw-bold texto-primario mb-2">Solicitar Tasación</h4>
+                    <p class="text-muted small mb-4">Escribinos ahora y coordinamos un turno inmediato.</p>
+                    <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20solicitar%20la%20tasacion%20de%20mi%20propiedad" target="_blank" class="btn btn-warning w-100 py-3 fs-5 fw-bold text-uppercase shadow-sm">
+                        <i class="bi bi-calculator me-2"></i>Tasar mi Propiedad
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 4. SECCIÓN: NUESTROS SERVICIOS (Fondo Blanco - Rompe el bloque oscuro antes del Footer) -->
+<section id="servicios" class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="text-center max-w-xl mx-auto mb-5">
+            <span class="text-uppercase fw-bold texto-dorado letter-spacing-1">¿Qué hacemos por vos?</span>
+            <h2 class="display-6 fw-bold texto-primario mt-2 fuente-titulos">Soluciones Inmobiliarias Integrales</h2>
+        </div>
+
+        <div class="row g-4">
+            <!-- Ventas -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center card-servicio">
+                    <div class="icon-box mb-3 mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="bi bi-house-heart fs-2 texto-primario"></i>
+                    </div>
+                    <h4 class="fw-bold texto-primario mb-3">Venta de Propiedades</h4>
+                    <p class="text-muted small flex-grow-1">Te acompañamos desde la publicación estratégica hasta la firma de la escritura, garantizando una operación segura y al mejor valor de mercado.</p>
+                    <a href="https://wa.me/5491112345678" target="_blank" class="btn btn-outline-success w-100 mt-3 fw-bold rounded-pill">
+                        <i class="bi bi-whatsapp me-2"></i>Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Alquileres -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center card-servicio">
+                    <div class="icon-box mb-3 mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="bi bi-key fs-2 texto-primario"></i>
+                    </div>
+                    <h4 class="fw-bold texto-primario mb-3">Alquileres y Gestión</h4>
+                    <p class="text-muted small flex-grow-1">Encontrá tu próximo hogar o maximizá la rentabilidad de tu inmueble con una rigurosa selección de inquilinos y contratos claros.</p>
+                    <a href="https://wa.me/5491112345678" target="_blank" class="btn btn-outline-success w-100 mt-3 fw-bold rounded-pill">
+                        <i class="bi bi-whatsapp me-2"></i>Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Inversiones -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center card-servicio">
+                    <div class="icon-box mb-3 mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="bi bi-graph-up-arrow fs-2 texto-primario"></i>
+                    </div>
+                    <h4 class="fw-bold texto-primario mb-3">Inversiones en Pozo</h4>
+                    <p class="text-muted small flex-grow-1">Asesoramiento financiero para resguardar tus ahorros en ladrillos, seleccionando los desarrollos con mayor potencial de revalorización.</p>
+                    <a href="https://wa.me/5491112345678" target="_blank" class="btn btn-outline-success w-100 mt-3 fw-bold rounded-pill">
+                        <i class="bi bi-whatsapp me-2"></i>Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

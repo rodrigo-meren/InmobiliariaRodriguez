@@ -1,75 +1,151 @@
-﻿@page
+﻿
+@page
+@using InmobiliariaRodriguez.Web.Models
 @model InmobiliariaRodriguez.Web.Pages.Catalogo.IndexModel
 @{
-    // Cambiamos el título dinámicamente según el partido elegido
-    ViewData["Title"] = Model.PartidoActual.HasValue ? $"Propiedades en {Model.PartidoActual}" : "Catálogo de Propiedades";
+    ViewData["Title"] = "Catálogo de Propiedades";
 }
 
-<div class="container mt-5 mb-5">
-    <div class="row mb-4 border-bottom pb-3">
-        <div class="col">
-            <h2 class="texto-primario fw-bold">
-                @(Model.PartidoActual.HasValue ? $"Propiedades en {Model.PartidoActual}" : "Todas nuestras propiedades")
-            </h2>
-            <p class="text-muted">Encontrá el lugar ideal para vos.</p>
+<div class="mb-4">
+    <h2 class="texto-primario fw-bold fuente-titulos">Propiedades en @(Model.Partido ?? "nuestro catálogo")</h2>
+    <p class="text-muted">Encontrá el lugar ideal para vos.</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm p-3 bg-white sticky-lg-top" style="top: 90px; z-index: 10;">
+            <h5 class="fw-bold texto-primario mb-3 border-bottom pb-2">
+                <i class="bi bi-funnel-fill texto-dorado me-2"></i>Buscar
+            </h5>
+
+            <form method="get">
+                <input type="hidden" asp-for="Partido" />
+
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Localidad</label>
+                    <select asp-for="Ciudad" class="form-select form-select-sm">
+                        <option value="">Todas las localidades</option>
+                        @foreach (var ciudad in Model.CiudadesDisponibles)
+                        {
+                            <option value="@ciudad">@ciudad</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Operación</label>
+                    <select asp-for="Operacion" class="form-select form-select-sm">
+                        <option value="">Venta o Alquiler</option>
+                        <option value="Venta">Venta</option>
+                        <option value="Alquiler">Alquiler</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Tipo de Inmueble</label>
+                    <select asp-for="Tipo" class="form-select form-select-sm">
+                        <option value="">Todos los tipos</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Departamento">Departamento</option>
+                        <option value="Duplex">Duplex</option>
+                        <option value="Terreno">Terreno</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label small fw-bold text-muted">Precio Máx. (USD)</label>
+                    <input asp-for="PrecioMax" type="number" class="form-control form-control-sm" placeholder="Ej: 150000" />
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark btn-sm fw-bold py-2">
+                        Aplicar Filtros
+                    </button>
+                    <a asp-page="./Index" class="btn btn-outline-secondary btn-sm py-2">
+                        Limpiar Búsqueda
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col-lg-9">
 
         @if (!Model.Propiedades.Any())
         {
-            <div class="col-12 text-center py-5">
-                <h4 class="text-muted">Por el momento no hay propiedades disponibles en esta zona.</h4>
-                <a asp-page="/Index" class="btn btn-outline-secondary mt-3">Volver al inicio</a>
+            <div class="alert alert-warning text-center py-5 shadow-sm rounded border-0 bg-white">
+                <i class="bi bi-house-exclamation display-4 text-warning mb-3 d-block"></i>
+                <h5 class="fw-bold">No encontramos propiedades con esos filtros</h5>
+                <p class="text-muted mb-0">Probá modificando los criterios o limpiando la búsqueda.</p>
             </div>
         }
-
-        @foreach (var propiedad in Model.Propiedades)
+        else
         {
-            // Buscamos la imagen de portada, si no tiene, usamos un gris de fondo
-            var imagenPortada = propiedad.Imagenes.FirstOrDefault(i => i.EsPortada)?.UrlImagen;
+            <div class="row g-4">
+                @foreach (var propiedad in Model.Propiedades)
+                {
+                    // Buscamos la imagen de portada, si no tiene, usamos un gris de fondo
+                    var imagenPortada = propiedad.Imagenes.FirstOrDefault(i => i.EsPortada)?.UrlImagen;
 
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0 tarjeta-ciudad">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card h-100 shadow-sm border-0 tarjeta-ciudad">
 
-                    @if (!string.IsNullOrEmpty(imagenPortada))
-                    {
-                        <img src="@imagenPortada" class="card-img-top" alt="@propiedad.Titulo" style="height: 250px; object-fit: cover;" />
-                    }
-                    else
-                    {
-                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
-                            <span class="text-muted">Sin imagen</span>
+                            @if (!string.IsNullOrEmpty(imagenPortada))
+                            {
+                                <img src="@imagenPortada" class="card-img-top" alt="@propiedad.Titulo" style="height: 250px; object-fit: cover;" />
+                            }
+                            else
+                            {
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                                    <span class="text-muted">Sin imagen</span>
+                                </div>
+                            }
+
+                            <div class="position-absolute top-0 end-0 m-3 d-flex flex-column align-items-end gap-2">
+                                <span class="badge bg-primario px-3 py-2 shadow">@propiedad.TipoOperacion</span>
+
+                                @if (propiedad.Estado != EstadoPropiedad.Disponible)
+                                {
+                                    string claseColor = propiedad.Estado switch
+                                    {
+                                        EstadoPropiedad.Vendida => "bg-danger",
+                                        EstadoPropiedad.Reservada => "bg-warning text-dark",
+                                        EstadoPropiedad.Oportunidad => "bg-success",
+                                        EstadoPropiedad.Retasada => "bg-info text-dark",
+                                        _ => "bg-secondary"
+                                    };
+
+                                    <span class="badge @claseColor px-3 py-2 shadow border border-white">@propiedad.Estado</span>
+                                }
+                            </div>
+
+                            <div class="card-body d-flex flex-column">
+                                <h4 class="texto-dorado fw-bold mb-1">@propiedad.Moneda @propiedad.Precio.ToString("N0")</h4>
+                                <h5 class="card-title texto-primario fw-bold mt-2">@propiedad.Titulo</h5>
+
+                                <p class="text-muted small mb-3">
+                                    <i class="bi bi-geo-alt-fill"></i> @propiedad.Ciudad, @propiedad.Partido
+                                </p>
+
+                                <div class="d-flex justify-content-between border-top pt-3 mt-auto text-muted small">
+                                    <span title="Ambientes"><strong>@propiedad.Ambientes</strong> Amb</span>
+                                    <span title="Habitaciones"><strong>@propiedad.Habitaciones</strong> Dor</span>
+                                    <span title="Baños"><strong>@propiedad.Baños</strong> Bañ</span>
+                                    <span title="Metros Totales"><strong>@propiedad.MetrosTotales</strong> m²</span>
+                                </div>
+                            </div>
+
+                            <div class="card-footer bg-white border-0 p-3 pt-0">
+                                <a asp-page="/Catalogo/Detalle" asp-route-id="@propiedad.Id" class="btn btn-outline-secondary w-100">Ver Detalles Completos</a>
+                            </div>
+
                         </div>
-                    }
-
-                    <div class="position-absolute top-0 end-0 m-3">
-                        <span class="badge bg-primario px-3 py-2 shadow">@propiedad.TipoOperacion</span>
                     </div>
-
-                    <div class="card-body d-flex flex-column">
-                        <h4 class="texto-dorado fw-bold mb-1">@propiedad.Moneda @propiedad.Precio.ToString("N0")</h4>
-                        <h5 class="card-title texto-primario fw-bold mt-2">@propiedad.Titulo</h5>
-
-                        <p class="text-muted small mb-3">
-                            <i class="bi bi-geo-alt-fill"></i> @propiedad.Ciudad, @propiedad.Partido
-                        </p>
-
-                        <div class="d-flex justify-content-between border-top pt-3 mt-auto text-muted small">
-                            <span title="Ambientes"><strong>@propiedad.Ambientes</strong> Amb</span>
-                            <span title="Habitaciones"><strong>@propiedad.Habitaciones</strong> Dor</span>
-                            <span title="Baños"><strong>@propiedad.Baños</strong> Bañ</span>
-                            <span title="Metros Totales"><strong>@propiedad.MetrosTotales</strong> m²</span>
-                        </div>
-                    </div>
-
-                    <div class="card-footer bg-white border-0 p-3 pt-0">
-                        <a asp-page="/Catalogo/Detalle" asp-route-id="@propiedad.Id" class="btn btn-outline-secondary w-100">Ver Detalles Completos</a>
-                    </div>
-                   
-                </div>
+                }
             </div>
-        }
+            }
+
     </div>
 </div>
+
+     
